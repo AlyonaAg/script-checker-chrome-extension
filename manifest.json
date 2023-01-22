@@ -1,0 +1,20 @@
+{
+  "name": "Script checking",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "Extension for collecting scripts on websites for further analysis",
+  "content_scripts": [
+    {
+        "matches": ["<all_urls>", "http://localhost/*"],
+        "all_frames": true,
+      	"css": ["mystyle.css"],
+        "js": ["pagesSource.js"],
+        "run_at": "document_end"
+    }
+  ],
+  "permissions": ["tabs"],
+  "host_permissions": ["<all_urls>", "http://localhost:4567/*"],
+  "content_security_policy": {
+    "extension_pages": "script-src http://localhost;  object-src http://localhost;"
+  }
+}
