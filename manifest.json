@@ -5,7 +5,7 @@
   "description": "Extension for collecting scripts on websites for further analysis",
   "content_scripts": [
     {
-        "matches": ["<all_urls>", "http://localhost/*"],
+        "matches": ["<all_urls>"],
       	"css": ["mystyle.css"],
         "js": ["pagesSource.js"],
         "run_at": "document_end"
