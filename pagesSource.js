@@ -24,6 +24,7 @@ function send_scripts(){
       var obj = new Object();
       obj.count = scripts.length
       obj.scripts = scripts
+      obj.url = window.location.href
       const response = await fetch(url, {
         method: 'POST',
         mode: 'no-cors',
@@ -39,7 +40,7 @@ function send_scripts(){
       return response;
   }
   
-  postData('http://localhost:4567/', scriptsArray)
+  postData('http://localhost:4567/v1/scripts/', scriptsArray)
     .then((data) => {
       console.log(data);
     });
