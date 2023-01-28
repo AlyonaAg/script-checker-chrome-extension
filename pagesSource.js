@@ -17,6 +17,7 @@ function send_scripts(){
       var obj = new Object();
       obj.count = scripts.length
       obj.scripts = scripts
+      obj.url = window.location.href
       const response = await fetch(url, {
         method: 'POST',
         mode: 'no-cors',
