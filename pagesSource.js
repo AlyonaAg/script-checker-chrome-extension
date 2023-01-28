@@ -13,13 +13,6 @@ function check_enable(){
 }
 
 function send_scripts(){
-  var scripts = document.getElementsByTagName("script");
-  var scriptsArray = Array.from(scripts);
-
-  scriptsArray = scriptsArray.
-    map(function(obj){{ return btoa(unescape(encodeURIComponent(obj.innerText))) }}).
-    filter(script => script.length > 0);
-
   async function postData(url = '', scripts = '') {
       var obj = new Object();
       obj.count = scripts.length
@@ -38,8 +31,23 @@ function send_scripts(){
       });
       return response;
   }
+
+  function getScript(url='') {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+  }
   
-  postData('http://localhost:4567/', scriptsArray)
+  scripts = (Array.from(document.getElementsByTagName("script"))).map(i => {return i.src})
+
+  var scriptsForPost = new Array(); 
+  for (index = 0; index < scripts.length; ++index) {
+    s = getScript(scripts[index]);
+    scriptsForPost.push(s)
+  }
+
+  postData('http://localhost:4567/', scriptsForPost)
     .then((data) => {
       console.log(data);
     });
