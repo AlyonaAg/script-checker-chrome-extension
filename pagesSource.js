@@ -45,7 +45,7 @@ function send_scripts(){
   var scriptsForPost = new Array(); 
   for (index = 0; index < scripts.length; ++index) {
     s = getScript(scripts[index]);
-    scriptsForPost.push(s)
+    scriptsForPost.push(btoa(unescape(encodeURIComponent(s))))
   }
 
   postData('http://localhost:4567/', scriptsForPost)
