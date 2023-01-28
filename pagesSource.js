@@ -32,23 +32,10 @@ function send_scripts(){
       });
       return response;
   }
-
-  function getScript(url='') {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", url, false );
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
-  }
   
   scripts = (Array.from(document.getElementsByTagName("script"))).map(i => {return i.src})
 
-  var scriptsForPost = new Array(); 
-  for (index = 0; index < scripts.length; ++index) {
-    s = getScript(scripts[index]);
-    scriptsForPost.push(btoa(unescape(encodeURIComponent(s))))
-  }
-
-  postData('http://localhost:4567/', scriptsForPost)
+  postData('http://localhost:4567/v1/scripts', scripts)
     .then((data) => {
       console.log(data);
     });
